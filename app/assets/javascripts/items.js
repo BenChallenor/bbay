@@ -20,7 +20,7 @@ document.addEventListener("turbolinks:load", function() {
         return function(e) {
           // Render thumbnail.
           var span = document.createElement('span');
-          span.innerHTML = ['<img class="instrument-preview-thumb" src="', e.target.result,
+          span.innerHTML = ['<img class="item-preview-thumb" src="', e.target.result,
             '" title="', escape(theFile.name), '"/>'
           ].join('');
           document.getElementById('list').insertBefore(span, null);
@@ -31,7 +31,7 @@ document.addEventListener("turbolinks:load", function() {
     }
   }
 
-  if (instrumentImage) {
+  if (itemImage) {
     this.addEventListener('change', handleFileSelect, false);
   }
 
