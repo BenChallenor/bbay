@@ -1,4 +1,5 @@
 class Item < ApplicationRecord
+  before_destroy :not_referenced_by_any_line_item
   mount_uploader :image, ImageUploader
   serialize :image, JSON
   belongs_to :user, optional: true
@@ -10,4 +11,12 @@ class Item < ApplicationRecord
 
   CONDITION = %w{ New Excellent Mint Used Fair Poor }
 
+  private
+
+  def not_referenced_by_any_line_item
+    unless line_items.empty?
+      errors.add(:base, "Line items present")
+      throw :abort
+    end
+  end
 end
